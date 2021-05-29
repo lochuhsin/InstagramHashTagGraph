@@ -33,7 +33,6 @@ for i in graph.keys():
 	elif count > 10000 and count < 100000:
 		pack10000 += 1
 	elif count > 100000:
-		pack100000 += 1
 		nodeName.append(i)
 
 
