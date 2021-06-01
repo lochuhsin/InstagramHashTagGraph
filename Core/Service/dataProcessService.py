@@ -25,10 +25,7 @@ class dataProcessService(object):
 
 	def getInstagramHashTagGraph(self): ##### defaultdict
 		graphdic = dataRepo(self.instagramHashTagGraphPath).getGraphFromJson()
-		if graphdic != None:
-			return defaultdict(dict,graphdic)	
-		else:
-			return {}
+		return defailtdict(dict,graphdic) if graphdic != None else {}
 
 	def saveInsPostData(self,data): ## data must be instagramPostModel
 
@@ -49,8 +46,6 @@ class dataProcessService(object):
 
 		graphrepo = dataRepo(self.instagramHashTagGraphPath)
 		graphrepo.saveGraphToJson(newGraph)
-
-
 
 	def _addNewItem(self,instagramPost):
 		oldGraph = self.getInstagramHashTagGraph()
@@ -79,19 +74,10 @@ class dataProcessService(object):
 
 
 	def _getPostIdList(self,data):
-		postIdList = []
-		for i in data:
-			postIdList.append(i['postId'])
-
-		return postIdList
+		return [i['postId'] for i in data]
 
 	def _getHashTagList(self,data):
-		hashTagList = []
-		for i in data:
-			taglist = i['postHashTag']
-			for tag in taglist:
-				hashTagList.append(tag)
-		return hashTagList
+		return [tag for i in data for tag in i['postHastTag']]
 
 
 		 
