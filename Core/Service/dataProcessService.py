@@ -1,6 +1,5 @@
 from Dao.Repository.dataRepo import dataRepo
 from Dao.Model.instagramPostModel import instagramPostModel
-from Dao.Model.instagramPostModel import hashTagGraph
 from collections import defaultdict
 import copy
 
@@ -25,7 +24,7 @@ class dataProcessService(object):
 
 	def getInstagramHashTagGraph(self): ##### defaultdict
 		graphdic = dataRepo(self.instagramHashTagGraphPath).getGraphFromJson()
-		return defailtdict(dict,graphdic) if graphdic != None else {}
+		return defaultdict(dict,graphdic) if graphdic != None else {}
 
 	def saveInsPostData(self,data): ## data must be instagramPostModel
 
@@ -42,10 +41,8 @@ class dataProcessService(object):
 		originalrepo = dataRepo(self.instagramPostPath)
 		originalrepo.saveDataToJson(instagramPosts)
 
-		newGraph = self._addNewItem(instagramPosts)
-
 		graphrepo = dataRepo(self.instagramHashTagGraphPath)
-		graphrepo.saveGraphToJson(newGraph)
+		graphrepo.saveGraphToJson(self._addNewItem(instagramPosts))
 
 	def _addNewItem(self,instagramPost):
 		oldGraph = self.getInstagramHashTagGraph()
@@ -77,7 +74,7 @@ class dataProcessService(object):
 		return [i['postId'] for i in data]
 
 	def _getHashTagList(self,data):
-		return [tag for i in data for tag in i['postHastTag']]
+		return [tag for i in data for tag in i['postHashTag']]
 
 
 		 

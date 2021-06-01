@@ -8,5 +8,5 @@ with open('dataBase/instagramAccountInfo.json','r') as f:
 	file = json.load(f)
 
 
-crawl.setupLoginAccount(username = file['account1']["account"],password = file['account1']["password"])
+crawl.setupLoginAccount(username = file['account2']["account"],password = file['account1']["password"])
 crawl.start()

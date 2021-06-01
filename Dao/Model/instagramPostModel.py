@@ -37,35 +37,6 @@ class instagramPostModel(object):
 		return True
 
 
-from collections import defaultdict
-
-class hashTagGraph(object):
-
-	def __init__(self):
-
-		self.container = defaultdict(dict)
-
-
-	def add(self,item1,item2,edgs=1):
-
-		if (item1 in self.container.keys()) and (item2 in self.container.keys()):
-			if (item1 not in self.container[item2].keys()):
-				self.container[item2][item1] = edgs
-				self.container[item1][item2] = edgs
-			elif(item1 in self.container[item1].keys()):
-				self.container[item1][item2] += edgs
-				self.container[item2][item1] += edgs
-
-		else: 
-			self.container[item1][item2] = edgs
-			self.container[item2][item1] = edgs
-
-	def setGraph(self,data):
-		self.container = defaultdict(dict,data)
-
-	def getGraph(self):
-		return copy.deepcopy(self.container)
-
 
 
 
