@@ -3,7 +3,6 @@ from Core.Service.crawlInstagramService import crawlInstagramService
 
 crawl = crawlInstagramService()
 
-
 with open('dataBase/instagramAccountInfo.json','r') as f:
 	import json
 	file = json.load(f)
