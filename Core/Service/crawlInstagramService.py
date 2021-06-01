@@ -39,7 +39,7 @@ class crawlInstagramService(object):
 		password = self.password
 		if username == None or password == None:
 			raise ValueError("Please setup username & password")
-			
+		
 		#data setup
 		self.dataProcessService = dataProcessService()
 		#web setup
