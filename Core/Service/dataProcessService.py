@@ -45,8 +45,6 @@ class dataProcessService(object):
 		originalrepo = dataRepo(self.instagramPostPath)
 		originalrepo.saveDataToJson(instagramPosts)
 
-
-
 		newGraph = self._addNewItem(instagramPosts)
 
 		graphrepo = dataRepo(self.instagramHashTagGraphPath)

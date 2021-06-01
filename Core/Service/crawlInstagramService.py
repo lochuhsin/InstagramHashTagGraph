@@ -11,14 +11,6 @@ class crawlInstagramService(object):
 
 	def __init__(self):
 
-		self.username = "applepie8868@gmail.com"
-		self.password = "Yaboyabo16881688"
-
-		#self.username = "lochuhsin.normal@gmail.com"
-		#self.password = "b0988246871"
-
-
-
 		self.insMainPage = 'mainPage'
 		self.insMainPageUrl = "https://www.instagram.com/"
 		self.heightPerRoll = 1000
@@ -40,11 +32,8 @@ class crawlInstagramService(object):
 		if username == None or password == None:
 			raise ValueError("Please setup username & password")
 		
-		#data setup
 		self.dataProcessService = dataProcessService()
-		#web setup
 		self.web = webOperationService()
-		#elementOperation setup
 		self.ele = elementOperation()
 
 
@@ -57,10 +46,10 @@ class crawlInstagramService(object):
 		time.sleep(4)
 
 		#datasetup
-		self._getoldPostId()
 		######### Remind that there is still a bug 
 		#### when hash tag list is empty ####
-		print("start Crawling ....................")
+		self._getoldPostId()
+
 		hashtaglist = self._getoldhastaglist()
 		count = 0
 		while count <= len(hashtaglist):
@@ -73,7 +62,6 @@ class crawlInstagramService(object):
 			insPostModel = self._crawler()
 
 			###### pass post container to data Process #######
-			print('finish looping saving data')
 			self.dataProcessService.saveInsPostData(insPostModel)
 		count += 1
 
@@ -90,12 +78,9 @@ class crawlInstagramService(object):
 
 				######### Check if post already exist ########
 				if self._checkIfPostNotExist(link):
-					#Go to new page
 					ele.click()
 					time.sleep(random.uniform(2,4))
 
-					
-					#Grab Information
 					if (self.web._checkIfElementExist("a.c-Yi7 time") and self.web._checkIfElementExist('a.xil3i')):
 						
 						post = self._grabInformation(link)
@@ -112,7 +97,6 @@ class crawlInstagramService(object):
 			time.sleep(2)
 			if self._checkIsPageBottom(last_height):
 				break
-			print(last_height,self.web.getPageHeight())
 
 		return insPostModel
 
@@ -126,8 +110,6 @@ class crawlInstagramService(object):
 		for i in postOperDic.keys():
 			if i == 'postId':
 				post[i] = postOperDic[i](link)
-
-				#update postlink list
 				self.insPostIdList.append(copy.copy(post[i]))
 			else:
 				post[i] = postOperDic[i]()
