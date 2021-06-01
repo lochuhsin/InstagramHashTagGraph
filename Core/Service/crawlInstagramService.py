@@ -17,8 +17,9 @@ class crawlInstagramService(object):
 		#self.username = "lochuhsin.normal@gmail.com"
 		#self.password = "b0988246871"
 
+
+
 		self.insMainPage = 'mainPage'
-		self.insPostPage = 'postPage'
 		self.insMainPageUrl = "https://www.instagram.com/"
 		self.heightPerRoll = 1000
 		self.web = None
@@ -27,31 +28,36 @@ class crawlInstagramService(object):
 		self.insPostIdList = None
 		self.dataProcessService = None
 
-		self.__crawlSetup()
 
-		
+	def setupLoginAccount(self,username = None,password = None):
+		self.username = username
+		self.password = password
 
-	def __crawlSetup(self):
+
+	def start(self):
+		username = self.username
+		password = self.password
+		if username == None or password == None:
+			raise ValueError("Please setup username & password")
+			
+		#data setup
 		self.dataProcessService = dataProcessService()
 		#web setup
 		self.web = webOperationService()
-
 		#elementOperation setup
 		self.ele = elementOperation()
+
 
 		#Open new page , Tab & go to instagram
 		self.web.openNewPage(self.insMainPage)
 		self.web.switchPage(self.insMainPage)
 		self.web.goToUrl(self.insMainPageUrl)
-
 		time.sleep(3)
-		self.web.login(self.username,self.password)
+		self.web.login(username,password)
 		time.sleep(4)
 
 		#datasetup
 		self._getoldPostId()
-
-	def start(self):
 		######### Remind that there is still a bug 
 		#### when hash tag list is empty ####
 		print("start Crawling ....................")

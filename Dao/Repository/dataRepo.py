@@ -35,16 +35,11 @@ class dataRepo(object):
 		else:
 			return None
 
-
-
-
-
 	def getDataFromJson(self):
 		if self._isFileExist():
 			return self._getFile()
 		else:
 			return[]
-
 
 	def _isFileExist(self):
 		return os.path.isfile(self.path)

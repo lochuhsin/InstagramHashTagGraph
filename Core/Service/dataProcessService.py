@@ -11,7 +11,7 @@ class dataProcessService(object):
 		self.instagramHashTagPath  = './dataBase/instagramHashTagList.json'
 		self.instagramPostPath     = './dataBase/instagramPostList.json' 
 		self.instagramHashTagGraphPath = './dataBase/instagramHashTagGraph.json' 
-
+		self.instagramLoginAccountPath = './dataBase/instagramAccountInfo.json'
 
 
 	def getInstagramPostIdList(self):
@@ -29,8 +29,6 @@ class dataProcessService(object):
 			return defaultdict(dict,graphdic)	
 		else:
 			return {}
-
-
 
 	def saveInsPostData(self,data): ## data must be instagramPostModel
 
